@@ -165,6 +165,12 @@ html.js section:not(.on) .portal-cut{transform:translateY(-50%) scale(.15);opaci
 .layers b{font-family:var(--display);font-weight:800;font-size:clamp(20px,1.8vw,27px);line-height:1.05;color:var(--cream)}
 .layers span{font-size:13.5px;font-weight:300;line-height:1.55;color:var(--paper)}
 
+.ba{display:grid;gap:12px;min-width:0}
+.ba .note{margin-top:2px;text-transform:none;letter-spacing:.02em;font-size:13px;font-family:var(--script);font-style:italic;opacity:.85}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chips li{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);padding:7px 12px;border:1px solid rgba(246,232,207,.3);border-radius:999px;background:rgba(20,11,8,.45)}
+.steps{counter-reset:none}
+.plan .note a{color:var(--tomato-soft)}
 @media (max-width:980px){
   .board{grid-template-columns:minmax(0,1fr)}
   .worlds{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -197,7 +203,7 @@ html.js section:not(.on) .portal-cut{transform:translateY(-50%) scale(.15);opaci
 <body>
 
 <div class="side">Insula&nbsp;//&nbsp;Harbor&nbsp;//&nbsp;MRM&nbsp;//&nbsp;Elefante&nbsp;85&nbsp;anos&nbsp;//&nbsp;Filme&nbsp;Hero</div>
-<div class="counter" aria-live="polite"><span id="cur">1</span> <em>de</em> <span id="tot">13</span></div>
+<div class="counter" aria-live="polite"><span id="cur">1</span> <em>de</em> <span id="tot">14</span></div>
 <nav class="dots" id="dots" aria-label="Seções"></nav>
 
 <main id="deck">
@@ -396,7 +402,7 @@ html.js section:not(.on) .portal-cut{transform:translateY(-50%) scale(.15);opaci
 <section class="plain" id="producao">
   <div class="board">
     <div class="block">
-      <div class="kicker">09</div>
+      <div class="kicker">09 <span>Uma proposta</span></div>
       <h2>produção híbrida</h2>
       <div class="script">atuação real, mundos construídos</div>
       <div class="rule"></div>
@@ -428,12 +434,40 @@ html.js section:not(.on) .portal-cut{transform:translateY(-50%) scale(.15);opaci
   </div>
 </section>
 
-<!-- 10 · TÉCNICAS E INTEGRAÇÃO -->
+<!-- 10 · 100% IA -->
+<section class="plain" id="ia">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">10 <span>Outra proposta</span></div>
+      <h2 style="text-transform:none">100% IA</h2>
+      <div class="script">a mesma família, todos os mundos gerados</div>
+      <div class="rule"></div>
+      <p class="lead">A outra proposta é realizar o filme inteiramente com inteligência artificial, da protagonista aos mundos que ela atravessa.</p>
+      <div class="body">
+        <p>O ponto de partida continua sendo o casting. Definimos cada personagem, a protagonista nas suas duas idades, a mãe, o filho, os amigos e o estilista, e construímos para cada um uma referência visual fixa, com rosto, corpo, figurino e gestual. Essa referência acompanha todas as gerações e faz com que a família seja reconhecida de um mundo para o outro.</p>
+        <p>Cada plano nasce como um quadro-chave e é aprovado como imagem antes de ganhar movimento. Só então animamos, com a câmera desenhada a partir das referências de travessia. Portais, transições e letreiros são compostos na pós, onde também entram as embalagens reais de Elefante e o Jotalhão em 2D, para que a marca apareça sempre fiel.</p>
+        <p>Sem estúdio e sem locação, a cozinha dos anos 1990, a passarela, o jantar e o zoológico ficam inteiramente nas mãos da direção, e cada mundo pode ser ajustado até a aprovação final.</p>
+        <p><strong>Para fugir da estética artificial, tratamos a imagem como cinema: luz motivada, foco suave, grão de película e atuações contidas, conduzidas pela mesma direção que guiaria um set.</strong></p>
+      </div>
+    </div>
+    <div class="plan">
+      <ol class="layers steps">
+        <li><small>01</small><b>personagens</b><span>referência fixa de rosto, figurino e gestual para cada integrante da família</span></li>
+        <li><small>02</small><b>quadros-chave</b><span>cada plano aprovado como imagem antes de virar movimento</span></li>
+        <li><small>03</small><b>animação</b><span>câmera e ação desenhadas a partir das referências de travessia</span></li>
+        <li><small>04</small><b>finalização</b><span>portais, letreiros, embalagens reais e Jotalhão 2D compostos na pós</span></li>
+      </ol>
+      <p class="note">Os <a href="#arte">primeiros quadros</a> deste tratamento já foram feitos assim.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · TÉCNICAS E INTEGRAÇÃO -->
 <section class="glow veil" id="integracao">
   <div class="bg" style="background-image:url('img/q-memorias-a.webp');background-position:70% center;filter:saturate(.7) brightness(.8)"></div>
   <div class="board">
     <div class="block">
-      <div class="kicker">10</div>
+      <div class="kicker">11</div>
       <h2>técnicas e integração</h2>
       <div class="script">o filmado e o gerado na mesma imagem</div>
       <div class="rule"></div>
@@ -442,12 +476,19 @@ html.js section:not(.on) .portal-cut{transform:translateY(-50%) scale(.15);opaci
         <p>Essa pesquisa contempla a composição dos ambientes e a integração de luz, textura e movimento, além das transições entre os mundos.</p>
         <p><strong>As referências ajudam a orientar essas possibilidades, sempre buscando um resultado natural, com unidade cinematográfica e sensível à emoção de cada cena.</strong></p>
       </div>
+      <ul class="chips">
+        <li>composição dos ambientes</li>
+        <li>luz, textura e movimento</li>
+        <li>transições entre os mundos</li>
+      </ul>
     </div>
-    <ul class="layers">
-      <li><small>01</small><b>composição dos ambientes</b><span>épocas e mundos construídos em volta da atuação filmada</span></li>
-      <li><small>02</small><b>luz, textura e movimento</b><span>a mesma luz no personagem e no cenário, sem costura aparente</span></li>
-      <li><small>03</small><b>transições entre os mundos</b><span>portais e passagens guiados pelo gesto de cada personagem</span></li>
-    </ul>
+    <div class="ba">
+      <figure class="embed"><div class="player"><video autoplay muted loop playsinline preload="metadata" poster="video/hibrido-original.webp" aria-label="Filmagem original com Ronaldinho Gaúcho"><source src="video/hibrido-original.mp4" type="video/mp4"><source src="video/hibrido-original.webm" type="video/webm"></video></div>
+        <figcaption><span>Filmagem original · Ronaldinho Gaúcho</span></figcaption></figure>
+      <figure class="embed"><div class="player"><video autoplay muted loop playsinline preload="metadata" poster="video/hibrido-final.webp" aria-label="Filme finalizado com Vini Jr."><source src="video/hibrido-final.mp4" type="video/mp4"><source src="video/hibrido-final.webm" type="video/webm"></video></div>
+        <figcaption><span>Filme finalizado · Vini Jr.</span></figcaption></figure>
+      <p class="note">Referência de híbrido: a mesma câmera e o mesmo movimento da filmagem, com outro personagem e outro ambiente construídos sobre ela.</p>
+    </div>
   </div>
 </section>
 
@@ -484,7 +525,7 @@ html.js section:not(.on) .portal-cut{transform:translateY(-50%) scale(.15);opaci
 <section class="glow shade-l" id="fim">
   <div class="bg" style="background-image:url('img/q-todos.webp');background-position:65% center"></div>
   <div class="block left">
-    <div class="kicker">11</div>
+    <div class="kicker">12</div>
     <h2>feito pra juntar</h2>
     <div class="script">a mesma cozinha, agora cheia</div>
     <div class="rule"></div>
@@ -534,7 +575,7 @@ function sync(){
 deck.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(sync)}},{passive:true});
 addEventListener('resize',sync);
 // um vídeo por vez
-const vids=[...document.querySelectorAll('.embed video')];
+const vids=[...document.querySelectorAll('.embed video:not([autoplay])')];
 vids.forEach(v=>v.addEventListener('play',()=>vids.forEach(o=>{if(o!==v)o.pause()})));
 document.addEventListener('keydown',e=>{
   if(e.target.closest&&e.target.closest('video'))return;
