@@ -178,6 +178,13 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
 .insula-mark{position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom, 0px));z-index:50;height:34px;width:auto;pointer-events:none;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
 .luz small{grid-row:span 2;font-family:var(--script);font-style:italic;font-size:17px;color:var(--leaf);line-height:1.2;min-width:5.5em}
 .bg-video{width:100%;height:100%;object-fit:cover;display:block}
+.recorte-fig{display:grid;justify-items:center;gap:6px}
+.recorte{width:min(100%,520px);aspect-ratio:1;max-width:100%;border-radius:50%;overflow:hidden;clip-path:circle(50% at 50% 50%);transition:clip-path 2.2s cubic-bezier(.2,.7,.2,1) .2s;background:var(--ink-2)}
+html.js section:not(.on) .recorte{clip-path:circle(3% at 50% 50%)}
+.recorte img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover;border-radius:0;box-shadow:none;transform:scale(1.1);transition:transform 7s ease-out}
+section.on .recorte img{transform:scale(1)}
+.recorte-fig figcaption{text-align:center;max-width:44ch}
+.ba-tag{display:inline-block;justify-self:start;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);background:var(--leaf);padding:5px 10px;border-radius:999px;font-weight:600}
 @media (max-width:980px){
   .board{grid-template-columns:minmax(0,1fr)}
   .quadros.four{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -201,7 +208,8 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
 }
 @media (prefers-reduced-motion:reduce){
   main{scroll-behavior:auto}
-  .bg,.block,.board,.worlds .thumb,.quadros img{transition:none!important;transform:none!important}
+  .bg,.block,.board,.worlds .thumb,.quadros img,.recorte,.recorte img{transition:none!important;transform:none!important}
+  html.js section:not(.on) .recorte{clip-path:circle(50% at 50% 50%)}
   html.js section:not(.on) .board, html.js section:not(.on) > .block{opacity:1}
 }
 </style>
@@ -351,7 +359,7 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
       <p><strong>Assim, o portal participa da narrativa e nos conduz entre épocas e ambientes com naturalidade, preservando a conexão afetiva com a protagonista.</strong></p>
     </div>
     </div>
-    <figure class="portal-fig"><video class="fig-video loop" muted loop playsinline preload="none" poster="img/q-portal.webp" aria-label="A protagonista olha o portal circular que se abre na cozinha de hoje e revela a mãe cozinhando nos anos 90"><source src="video/cena-portal.mp4" type="video/mp4"><source src="video/cena-portal.webm" type="video/webm"></video><figcaption>Hoje, diante da cozinha da mãe nos anos 1990: o portal se abre ao lado dela.</figcaption></figure>
+    <figure class="portal-fig recorte-fig"><div class="recorte"><img src="img/q-portal-recorte.webp" alt="Recorte circular revelando a mãe cozinhando nos anos 1990, com a TV de tubo ao fundo" loading="lazy"></div><figcaption>O portal como recorte: a cozinha da mãe nos anos 1990 se abre dentro da imagem de hoje, sem efeito de luz, como uma moldura que cresce.</figcaption></figure>
   </div>
 </section>
 
@@ -489,11 +497,12 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
       </ul>
     </div>
     <div class="ba">
-      <figure class="embed"><div class="player"><video autoplay muted loop playsinline preload="metadata" poster="video/hibrido-original.webp" aria-label="Filmagem original com Ronaldinho Gaúcho"><source src="video/hibrido-original.mp4" type="video/mp4"><source src="video/hibrido-original.webm" type="video/webm"></video></div>
-        <figcaption><span>Filmagem original · Ronaldinho Gaúcho</span></figcaption></figure>
-      <figure class="embed"><div class="player"><video autoplay muted loop playsinline preload="metadata" poster="video/hibrido-final.webp" aria-label="Filme finalizado com Vini Jr."><source src="video/hibrido-final.mp4" type="video/mp4"><source src="video/hibrido-final.webm" type="video/webm"></video></div>
-        <figcaption><span>Filme finalizado · Vini Jr.</span></figcaption></figure>
-      <p class="note">Referência de híbrido: a mesma câmera e o mesmo movimento da filmagem, com outro personagem e outro ambiente construídos sobre ela.</p>
+      <span class="ba-tag">Teste Insula · híbrido</span>
+      <figure class="embed"><div class="player"><video autoplay muted loop playsinline preload="metadata" poster="video/hibrido-original.webp" aria-label="Teste Insula: filmagem original com Ronaldinho Gaúcho"><source src="video/hibrido-original.mp4" type="video/mp4"><source src="video/hibrido-original.webm" type="video/webm"></video></div>
+        <figcaption><span>Teste Insula · filmagem original com Ronaldinho Gaúcho</span></figcaption></figure>
+      <figure class="embed"><div class="player"><video autoplay muted loop playsinline preload="metadata" poster="video/hibrido-final.webp" aria-label="Teste Insula: o mesmo take reconstruído em IA com Vini Jr."><source src="video/hibrido-final.mp4" type="video/mp4"><source src="video/hibrido-final.webm" type="video/webm"></video></div>
+        <figcaption><span>Teste Insula · o mesmo take reconstruído em IA com Vini Jr.</span></figcaption></figure>
+      <p class="note">Teste realizado pela Insula: sobre uma filmagem real, mantivemos a câmera e o movimento e reconstruímos personagem e ambiente em IA.</p>
     </div>
   </div>
 </section>
