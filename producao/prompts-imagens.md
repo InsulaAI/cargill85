@@ -5,7 +5,7 @@ Formato de todas as imagens: **16:9, fotorrealista**. Prompts em inglês (rendem
 
 ## Regras que todo plano segue
 
-Saídas do deck MRM (v2) e do tratamento.
+Saídas do deck da LoganX (v2) e do tratamento.
 
 **Casting** (manter os mesmos rostos em todas as cenas — usar a imagem aprovada da protagonista como referência de personagem nas gerações seguintes)
 - Protagonista: mulher negra, 35 anos, cabelo cacheado preso. Figurino de hoje: camisa e calça de linho cru.
