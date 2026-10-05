@@ -139,6 +139,7 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
 .embed{position:relative;min-width:0}
 .embed .player{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;background:#000;border:1px solid rgba(229,67,44,.45);border-radius:3px;overflow:hidden}
 .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.embed video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:block}
 .embed figcaption{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(246,232,207,.74);padding-top:9px}
 .embed figcaption a{color:var(--tomato-soft);text-decoration:none}
 .embed figcaption a:hover{color:var(--cream)}
@@ -246,8 +247,8 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
       </div>
     </div>
     <figure class="embed">
-      <div class="player"><iframe loading="lazy" src="https://drive.google.com/file/d/1oJxV4TnTbJO26OmiMOQm_yTp7RWQ61TZ/preview" allow="autoplay; fullscreen" allowfullscreen title="Referência · Split + match cut"></iframe></div>
-      <figcaption><span>Referência · Split + match cut</span><a href="https://drive.google.com/file/d/1oJxV4TnTbJO26OmiMOQm_yTp7RWQ61TZ/view" target="_blank" rel="noopener">Abrir no Drive ↗</a></figcaption>
+      <div class="player"><video controls playsinline preload="none" poster="video/split-match-cut.webp" aria-label="Referência · Split + match cut"><source src="video/split-match-cut.mp4" type="video/mp4"><source src="video/split-match-cut.webm" type="video/webm"></video></div>
+      <figcaption><span>Referência · Split + match cut</span></figcaption>
     </figure>
   </div>
 </section>
@@ -269,8 +270,8 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
       </div>
     </div>
     <figure class="embed">
-      <div class="player"><iframe loading="lazy" src="https://drive.google.com/file/d/19SO-ibORKi1gIZ3avS8ddv1V3-yWBFHs/preview" allow="autoplay; fullscreen" allowfullscreen title="Referência · Transições suaves"></iframe></div>
-      <figcaption><span>Referência · Transições suaves</span><a href="https://drive.google.com/file/d/19SO-ibORKi1gIZ3avS8ddv1V3-yWBFHs/view" target="_blank" rel="noopener">Abrir no Drive ↗</a></figcaption>
+      <div class="player"><video controls playsinline preload="none" poster="video/transicoes-suaves.webp" aria-label="Referência · Transições suaves"><source src="video/transicoes-suaves.mp4" type="video/mp4"><source src="video/transicoes-suaves.webm" type="video/webm"></video></div>
+      <figcaption><span>Referência · Transições suaves</span></figcaption>
     </figure>
   </div>
 </section>
@@ -291,8 +292,8 @@ a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline
       </div>
     </div>
     <figure class="embed">
-      <div class="player"><iframe loading="lazy" src="https://drive.google.com/file/d/1F3cNkzil796SHt5bm8Hp_7PQ1qLnj14L/preview" allow="autoplay; fullscreen" allowfullscreen title="Referência · Virada de página"></iframe></div>
-      <figcaption><span>Referência · Virada de página</span><a href="https://drive.google.com/file/d/1F3cNkzil796SHt5bm8Hp_7PQ1qLnj14L/view" target="_blank" rel="noopener">Abrir no Drive ↗</a></figcaption>
+      <div class="player"><video controls playsinline preload="none" poster="video/virada-de-pagina.webp" aria-label="Referência · Virada de página"><source src="video/virada-de-pagina.mp4" type="video/mp4"><source src="video/virada-de-pagina.webm" type="video/webm"></video></div>
+      <figcaption><span>Referência · Virada de página</span></figcaption>
     </figure>
   </div>
 </section>
@@ -639,7 +640,11 @@ function sync(){
 }
 deck.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(sync)}},{passive:true});
 addEventListener('resize',sync);
+// um vídeo por vez
+const vids=[...document.querySelectorAll('.embed video')];
+vids.forEach(v=>v.addEventListener('play',()=>vids.forEach(o=>{if(o!==v)o.pause()})));
 document.addEventListener('keydown',e=>{
+  if(e.target.closest&&e.target.closest('video'))return;
   if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();secs[Math.min(idx+1,secs.length-1)].scrollIntoView({behavior:'smooth'})}
   if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();secs[Math.max(idx-1,0)].scrollIntoView({behavior:'smooth'})}
 });
