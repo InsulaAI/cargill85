@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Elefante 85 anos · Filme Hero. Tratamento com a visão do diretor.">
+<title>Elefante · Feito pra Juntar</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Archivo:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* Layout: deck vertical em tela cheia, como o tratamento de referência — capítulos com imagem
+   de fundo alternam com seções de storyboard (texto + quadros do roteiro). Visual único, escuro. */
+:root{
+  --ink:#140b08;          /* fundo: quase preto puxado para o tomate */
+  --ink-2:#22130d;        /* fundo das seções de storyboard */
+  --cream:#f6e8cf;        /* creme do lettering da campanha */
+  --paper:#ece2d3;        /* texto corrido */
+  --tomato:#e5432c;       /* vermelho Elefante, ajustado para fundo escuro */
+  --tomato-soft:#ff9a6e;  /* subtítulos em itálico */
+  --leaf:#8fd400;         /* verde Jotalhão: marcadores */
+  --line:rgba(246,232,207,.18);
+  --display:'Baloo 2', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
+  --script:'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --gutter:max(16px, 6vw);
+  color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+main{height:100%;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth;scrollbar-width:none}
+main::-webkit-scrollbar{display:none}
+
+section{position:relative;min-height:100%;scroll-snap-align:start;overflow:hidden;display:flex;align-items:center;padding-block:11vh}
+
+/* ---------- imagem de fundo ---------- */
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.05);transition:transform 7s ease-out;filter:saturate(1.08) contrast(1.04)}
+section.on .bg{transform:scale(1)}
+.glow::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(ellipse 60% 50% at 80% 6%, rgba(255,170,90,.22), transparent 62%),
+             linear-gradient(180deg, rgba(20,11,8,0) 40%, rgba(20,11,8,.5) 100%)}
+.shade-r::before,.shade-l::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1}
+.shade-r::before{background:linear-gradient(270deg, rgba(20,11,8,.86) 0%, rgba(20,11,8,.55) 36%, rgba(20,11,8,0) 64%)}
+.shade-l::before{background:linear-gradient(90deg, rgba(20,11,8,.86) 0%, rgba(20,11,8,.55) 36%, rgba(20,11,8,0) 64%)}
+.plain{background:linear-gradient(160deg, var(--ink-2) 0%, var(--ink) 72%)}
+
+/* ---------- bloco de texto ---------- */
+.block{position:relative;z-index:2;width:min(640px,100%);padding-inline:var(--gutter);transition:opacity 1s ease .1s, transform 1s ease .1s}
+html.js section:not(.on) .board, html.js section:not(.on) > .block{opacity:.2;transform:translateY(22px)}
+.right{margin-left:auto}
+.left{margin-right:auto}
+
+h1,h2{font-family:var(--display);font-weight:800;color:var(--cream);text-transform:lowercase;letter-spacing:-.015em;line-height:.9;text-wrap:balance}
+h2{font-size:clamp(46px,6.6vw,108px)}
+.script{font-family:var(--script);font-style:italic;font-weight:400;color:var(--tomato-soft);font-size:clamp(22px,2.7vw,42px);line-height:1.1;margin-top:.18em;text-wrap:balance}
+.rule{width:120px;height:2px;background:var(--tomato);margin:26px 0 20px;position:relative;border-radius:2px}
+.rule::after{content:'';position:absolute;right:-12px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--leaf)}
+.lead{font-family:var(--script);font-style:italic;color:var(--cream);font-size:clamp(18px,1.55vw,23px);line-height:1.42;margin-bottom:16px;max-width:60ch}
+.body{font-size:clamp(14px,1.04vw,16px);font-weight:300;line-height:1.7;color:var(--paper);max-width:62ch}
+.body p+p{margin-top:.9em}
+.body strong{font-weight:600;color:var(--cream)}
+.body q{quotes:'“' '”';font-style:italic;color:var(--cream)}
+.kicker{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--cream);opacity:.88;margin-bottom:18px;font-weight:500;display:flex;flex-wrap:wrap;gap:6px 14px}
+.kicker span{color:var(--tomato-soft)}
+.note{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);opacity:.7;margin-top:18px;line-height:1.6}
+.endmark{font-family:var(--script);font-style:italic;color:var(--tomato-soft);font-size:24px;margin-top:26px;letter-spacing:.06em}
+
+/* botão de referência em vídeo */
+.ref{display:inline-flex;align-items:center;gap:12px;margin-top:24px;padding:12px 20px 12px 14px;border:1px solid var(--tomato);border-radius:999px;color:var(--cream);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;background:rgba(20,11,8,.5);backdrop-filter:blur(6px);transition:background .3s, border-color .3s}
+.ref::before{content:'';width:26px;height:26px;border-radius:50%;background:var(--tomato) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='%23f6e8cf'/%3E%3C/svg%3E") center/16px no-repeat;flex:none}
+.ref:hover{background:var(--tomato)}
+.ref:hover::before{background-color:var(--ink)}
+a:focus-visible,.dots button:focus-visible{outline:2px solid var(--leaf);outline-offset:3px}
+
+/* ---------- moldura fixa ---------- */
+.side{position:fixed;left:18px;bottom:26px;z-index:50;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,232,207,.7);pointer-events:none}
+.counter{position:fixed;right:24px;bottom:calc(20px + env(safe-area-inset-bottom, 0px));z-index:50;background:rgba(20,11,8,.55);backdrop-filter:blur(6px);border:1px solid rgba(229,67,44,.45);border-radius:22px;padding:8px 18px;font-size:12px;letter-spacing:.08em;color:var(--cream);font-variant-numeric:tabular-nums}
+.counter em{font-family:var(--script);font-style:italic;color:var(--tomato-soft);padding:0 3px}
+.dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:12px}
+.dots button{display:block;width:6px;height:6px;border-radius:50%;border:0;background:rgba(246,232,207,.3);cursor:pointer;transition:transform .4s, background .4s;padding:0}
+.dots button.cur{background:var(--leaf);transform:scale(1.6)}
+
+/* ---------- capa ---------- */
+.cover .block{width:min(820px,100%)}
+.cover h1{font-size:clamp(64px,10.5vw,176px)}
+.cover .script{font-size:clamp(28px,3.6vw,58px)}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:24px;font-size:12px;letter-spacing:.38em;text-transform:uppercase;color:var(--cream)}
+.brandline i{display:block;width:56px;height:2px;background:var(--tomato);border-radius:2px}
+.credits{position:absolute;bottom:6vh;left:0;right:0;z-index:3;display:flex;justify-content:space-between;padding-inline:var(--gutter);gap:14px 24px;flex-wrap:wrap}
+.credit small{display:block;font-size:11px;letter-spacing:.2em;color:rgba(246,232,207,.72);margin-bottom:4px;font-weight:300}
+.credit b{font-family:var(--display);font-weight:700;font-size:clamp(17px,1.7vw,26px);color:var(--cream);letter-spacing:.01em}
+
+/* ---------- storyboard (cenas) ---------- */
+.board{position:relative;z-index:2;width:min(1280px,100%);margin:0 auto;padding-inline:var(--gutter);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,64px);align-items:center;transition:opacity 1s ease .1s, transform 1s ease .1s}
+.board .block{width:auto;padding-inline:0}
+.board h2{font-size:clamp(44px,5.6vw,92px)}
+.frames{display:grid;gap:10px;min-width:0}
+.frames figure{position:relative;min-width:0}
+.frames img{display:block;width:100%;max-width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;background:var(--ink-2)}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px}
+.frames figcaption{font-size:11px;line-height:1.45;color:rgba(236,226,211,.74);padding-top:7px}
+.frames .main figcaption{font-size:12px}
+.square img{aspect-ratio:1}
+.swatches{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.swatches span{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);padding:5px 10px 5px 5px;border:1px solid var(--line);border-radius:999px}
+.swatches i{width:16px;height:16px;border-radius:50%;background:var(--c);flex:none}
+
+/* ---------- grid dos mundos ---------- */
+.worlds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:30px}
+.worlds a{position:relative;display:block;aspect-ratio:3/4.3;overflow:hidden;text-decoration:none;border-radius:3px;background:var(--ink-2)}
+.worlds .thumb{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s ease, filter .8s ease;filter:saturate(1.05)}
+.worlds a:hover .thumb{transform:scale(1.07);filter:saturate(1.2) brightness(1.06)}
+.worlds i{position:absolute;inset:auto 0 0 0;padding:44px 12px 12px;background:linear-gradient(180deg,transparent,rgba(20,11,8,.9));font-style:normal}
+.worlds b{display:block;font-family:var(--display);font-weight:800;color:var(--cream);font-size:clamp(17px,1.6vw,26px);line-height:1;text-transform:lowercase}
+.worlds s{text-decoration:none;font-family:var(--script);font-style:italic;color:var(--tomato-soft);font-size:clamp(12px,.95vw,14px)}
+.wide{width:min(1180px,100%);margin:0 auto;padding-inline:var(--gutter)}
+.wide .block{width:auto;padding-inline:0}
+
+/* ---------- anexo de vídeos ---------- */
+.vids{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:30px}
+.vid{display:flex;flex-direction:column;gap:10px;padding:20px 18px 18px;border:1px solid var(--line);border-radius:4px;text-decoration:none;color:var(--paper);background:rgba(246,232,207,.03);transition:border-color .3s, background .3s;min-width:0}
+.vid:hover{border-color:var(--tomato);background:rgba(229,67,44,.08)}
+.vid small{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--tomato-soft)}
+.vid b{font-family:var(--display);font-weight:800;font-size:clamp(22px,2vw,30px);line-height:1;color:var(--cream);text-transform:lowercase}
+.vid span{font-size:13px;font-weight:300;line-height:1.55}
+.vid em{margin-top:auto;padding-top:8px;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream)}
+
+
+/* ---------- vídeos embutidos ---------- */
+.veil::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg, rgba(20,11,8,.9) 0%, rgba(20,11,8,.74) 46%, rgba(20,11,8,.58) 100%)}
+.embed{position:relative;min-width:0}
+.embed .player{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;background:#000;border:1px solid rgba(229,67,44,.45);border-radius:3px;overflow:hidden}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.embed figcaption{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(246,232,207,.74);padding-top:9px}
+.embed figcaption a{color:var(--tomato-soft);text-decoration:none}
+.embed figcaption a:hover{color:var(--cream)}
+
+@media (max-width:980px){
+  .board{grid-template-columns:minmax(0,1fr)}
+  .worlds{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .vids{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:820px){
+  .side,.dots{display:none}
+  .shade-r::before,.shade-l::before{background:linear-gradient(180deg, rgba(20,11,8,.55) 0%, rgba(20,11,8,.78) 45%, rgba(20,11,8,.9) 100%)}
+  .credits{position:relative;bottom:auto;margin-top:8vh;justify-content:flex-start}
+  .cover{flex-direction:column;justify-content:center;align-items:stretch}
+  .strip{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .strip.three figure:last-child:nth-child(odd){grid-column:span 2}
+  .counter{right:16px}
+}
+@media (max-width:520px){
+  .worlds{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vids{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  main{scroll-behavior:auto}
+  .bg,.block,.board,.worlds .thumb{transition:none!important;transform:none!important}
+  html.js section:not(.on) .board, html.js section:not(.on) > .block{opacity:1}
+}
+</style>
+
+</head>
+<body>
+
+<div class="side">Insula&nbsp;//&nbsp;MRM&nbsp;//&nbsp;Elefante&nbsp;85&nbsp;anos&nbsp;//&nbsp;Filme&nbsp;Hero</div>
+<div class="counter" aria-live="polite"><span id="cur">1</span> <em>de</em> <span id="tot">18</span></div>
+<nav class="dots" id="dots" aria-label="Seções"></nav>
+
+<main id="deck">
+
+<!-- CAPA -->
+<section class="cover glow shade-r" id="capa">
+  <div class="bg" style="background-image:url('img/capa.webp');background-position:30% center"></div>
+  <div class="block right">
+    <div class="brandline"><i></i>Elefante · 85 anos</div>
+    <h1>feito pra juntar</h1>
+    <div class="script">filme hero</div>
+    <div class="rule"></div>
+    <p class="lead">Tratamento. Visão do diretor.</p>
+  </div>
+  <div class="credits">
+    <div class="credit"><small>cliente</small><b>Elefante</b></div>
+    <div class="credit"><small>agência</small><b>MRM</b></div>
+    <div class="credit"><small>produção</small><b>Insula</b></div>
+    <div class="credit"><small>peça</small><b>Filme Hero · FY27</b></div>
+  </div>
+</section>
+
+<!-- 01 · IDEIA CENTRAL -->
+<section class="glow shade-r" id="ideia">
+  <div class="bg" style="background-image:url('img/ideia.webp');background-position:30% center"></div>
+  <div class="block right">
+    <div class="kicker">01</div>
+    <h2>a ideia central</h2>
+    <div class="script">uma cozinha que abre para outras cozinhas</div>
+    <div class="rule"></div>
+    <p class="lead">Uma mulher procura o Elefante na própria cozinha e, para encontrá-lo, atravessa a própria vida.</p>
+    <div class="body">
+      <p>O filme parte de um gesto doméstico. A receita está no fogo, falta o extrato, e ela pergunta em voz alta onde ele foi parar. A partir daí, cada portal leva a protagonista a um mundo em que a marca já estava presente: a cozinha da mãe nos anos 1990, uma passarela de moda, um jantar entre amigos, uma tarde no zoológico com o filho.</p>
+      <p>A busca pelo pote vira uma volta pelos encontros que esse sabor juntou ao longo dos anos. Quando ela retorna ao ponto de partida, o Elefante estava ali o tempo todo, e as pessoas que ela visitou chegam para a mesma bancada.</p>
+      <p><strong>São 85 anos de Elefante em cozinhas brasileiras, contados como lembrança vivida, em primeira pessoa.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · PASSAGENS DE TEMPO E ENCONTROS -->
+<section class="glow shade-l" id="passagens">
+  <div class="bg" style="background-image:url('img/portal-anos90-passarela.webp')"></div>
+  <div class="block left">
+    <div class="kicker">02</div>
+    <h2>passagens de tempo e encontros</h2>
+    <div class="script">continuidade visual e afetiva</div>
+    <div class="rule"></div>
+    <p class="lead">A proposta do portal nos convida a atravessar diferentes mundos para descobrir Elefante presente nas histórias e nos encontros dessa família.</p>
+    <div class="body">
+      <p>Na direção, queremos que essas passagens tenham uma continuidade visual e afetiva, conduzindo o espectador pela vida da protagonista com fluidez, surpresa e emoção.</p>
+      <p>Três referências oferecem caminhos para construir essa linguagem. Elas funcionam como alternativas: a escolha parte da emoção e do ritmo de cada passagem, mantendo uma unidade ao longo do filme.</p>
+      <p><strong>Planejaremos os movimentos de câmera e as ações dos personagens para que cada mudança tenha uma conexão clara com a cena seguinte, dando ao espectador tempo para reconhecer o novo ambiente e se envolver com o encontro.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · SPLIT + MATCH CUT -->
+<section class="glow veil" id="split">
+  <div class="bg" style="background-image:url('img/portal-passarela-cozinha.webp')"></div>
+  <div class="board">
+    <div class="block">
+      <div class="kicker">03 <span>Travessia · caminho A</span></div>
+      <h2>split + match cut</h2>
+      <div class="script">o gesto permanece, o mundo muda</div>
+      <div class="rule"></div>
+      <p class="lead">A conexão acontece pela continuidade dos movimentos e pela aproximação entre enquadramentos.</p>
+      <div class="body">
+        <p>Diferentes espaços se encontram dentro da mesma composição, permitindo que uma ação iniciada em um ambiente prossiga no seguinte. Podemos explorar esse princípio nas travessias da protagonista: ela começa a caminhar em uma época e completa o movimento em outra, agora com uma nova idade, figurino e contexto.</p>
+        <p><strong>O gesto permanece enquanto o mundo se transforma ao seu redor.</strong></p>
+      </div>
+    </div>
+    <figure class="embed">
+      <div class="player"><iframe loading="lazy" src="https://drive.google.com/file/d/1oJxV4TnTbJO26OmiMOQm_yTp7RWQ61TZ/preview" allow="autoplay; fullscreen" allowfullscreen title="Referência · Split + match cut"></iframe></div>
+      <figcaption><span>Referência · Split + match cut</span><a href="https://drive.google.com/file/d/1oJxV4TnTbJO26OmiMOQm_yTp7RWQ61TZ/view" target="_blank" rel="noopener">Abrir no Drive ↗</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 04 · TRANSIÇÕES SUAVES -->
+<section class="glow veil" id="suaves">
+  <div class="bg" style="background-image:url('img/portal-cozinha-anos90.webp');background-position:35% center"></div>
+  <div class="board">
+    <div class="block">
+      <div class="kicker">04 <span>Travessia · caminho B</span></div>
+      <h2>transições suaves</h2>
+      <div class="script">reencontrar uma memória</div>
+      <div class="rule"></div>
+      <p class="lead">Uma abordagem mais sensível à passagem do tempo.</p>
+      <div class="body">
+        <p>As imagens se sobrepõem e os ambientes se modificam gradualmente, conectando etapas da vida através de espaços e relações que reconhecemos. Esse caminho tem especial força no encontro com a mãe, na cozinha dos anos 1990.</p>
+        <p>A madeira da cozinha de hoje vai cedendo ao azulejo estampado, ao fogão de quatro bocas e à TV de tubo. A luz esquenta, e o chiado do vinil sobe por baixo da trilha.</p>
+        <p><strong>A transformação da mulher em menina pode acontecer durante a aproximação, fazendo com que a chegada ao abraço carregue a emoção de reencontrar uma memória.</strong></p>
+      </div>
+    </div>
+    <figure class="embed">
+      <div class="player"><iframe loading="lazy" src="https://drive.google.com/file/d/19SO-ibORKi1gIZ3avS8ddv1V3-yWBFHs/preview" allow="autoplay; fullscreen" allowfullscreen title="Referência · Transições suaves"></iframe></div>
+      <figcaption><span>Referência · Transições suaves</span><a href="https://drive.google.com/file/d/19SO-ibORKi1gIZ3avS8ddv1V3-yWBFHs/view" target="_blank" rel="noopener">Abrir no Drive ↗</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 05 · VIRADA DE PÁGINA -->
+<section class="glow veil" id="virada">
+  <div class="bg" style="background-image:url('img/portal-cozinha-zoo.webp');background-position:60% center"></div>
+  <div class="board">
+    <div class="block">
+      <div class="kicker">05 <span>Travessia · caminho C</span></div>
+      <h2>virada de página</h2>
+      <div class="script">capítulos de um álbum vivo</div>
+      <div class="rule"></div>
+      <p class="lead">Recortes e molduras reorganizam a imagem, revelando novas cenas como capítulos de um álbum vivo.</p>
+      <div class="body">
+        <p>Para o nosso filme, essa lógica permite apresentar cada universo como uma descoberta: a próxima história surge dentro da imagem atual, ganha espaço e passa a envolver a personagem.</p>
+        <p><strong>É uma possibilidade de dar forma aos portais do roteiro com uma linguagem gráfica que também pode dialogar com os recortes da cena final, onde o círculo da embalagem se preenche com as cenas do filme.</strong></p>
+      </div>
+    </div>
+    <figure class="embed">
+      <div class="player"><iframe loading="lazy" src="https://drive.google.com/file/d/1F3cNkzil796SHt5bm8Hp_7PQ1qLnj14L/preview" allow="autoplay; fullscreen" allowfullscreen title="Referência · Virada de página"></iframe></div>
+      <figcaption><span>Referência · Virada de página</span><a href="https://drive.google.com/file/d/1F3cNkzil796SHt5bm8Hp_7PQ1qLnj14L/view" target="_blank" rel="noopener">Abrir no Drive ↗</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 06 · O PORTAL -->
+<section class="glow shade-l" id="portal">
+  <div class="bg" style="background-image:url('img/portal-zoo-cozinha.webp');background-position:65% center"></div>
+  <div class="block left">
+    <div class="kicker">06</div>
+    <h2>o portal</h2>
+    <div class="script">delicado como uma lembrança, alegre como um encontro</div>
+    <div class="rule"></div>
+    <p class="lead">Também vamos pesquisar graficamente como o portal se revela e se integra a cada transição.</p>
+    <div class="body">
+      <p>Exploraremos sua forma, textura e movimento em sintonia com a câmera e com a ação dos personagens. Queremos que ele se comporte de maneira suave e reflita a emoção de cada passagem, acompanhando tanto a delicadeza de uma lembrança quanto a alegria de um novo encontro.</p>
+      <p>O ponto de partida é o recorte circular que já aparece no roteiro, parente da boca do pote e do círculo da cartela final. Ele abre primeiro como uma fresta e cresce no ritmo do passo da protagonista.</p>
+      <p><strong>Assim, o portal participa da narrativa e nos conduz entre épocas e ambientes com naturalidade, preservando a conexão afetiva com a protagonista.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · O SOM -->
+<section class="glow shade-l" id="som">
+  <div class="bg" style="background-image:url('img/passarela.webp');background-position:65% center"></div>
+  <div class="block left">
+    <div class="kicker">07</div>
+    <h2>o som</h2>
+    <div class="script">ouvimos a próxima história antes de vê-la</div>
+    <div class="rule"></div>
+    <p class="lead">O som também participa dessa construção.</p>
+    <div class="body">
+      <p>As duas batidas recorrentes no roteiro podem marcar o instante da transformação. Elas aparecem em todos os mundos: as batidinhas na bancada, a colher na panela da mãe, os dois flashes no fim da passarela, os dois beijinhos no ar, os dois toques na blusa do filho e, de novo, a colher na panela no final.</p>
+      <p>Enquanto isso, a música e os sons do próximo ambiente começam a chegar antes da mudança visual: o vinil abafado dos anos 1990, os aplausos e os flashes da passarela, as conversas e risadas do jantar, a natureza e as vozes de criança do zoológico.</p>
+      <p><strong>Assim, ouvimos uma nova história se aproximar e acompanhamos a protagonista em sua descoberta.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · FOTOGRAFIA E ARTE -->
+<section class="plain" id="arte">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">08</div>
+      <h2>fotografia e arte</h2>
+      <div class="script">vermelho e verde em cena</div>
+      <div class="rule"></div>
+      <p class="lead">Cada mundo tem a sua luz, e a marca está em todos eles.</p>
+      <div class="body">
+        <p>Luz quente e ambientes bem iluminados, em casas de classe AB com decoração aconchegante e toques de modernidade. As cozinhas são amplas, com espaço para várias pessoas em volta da bancada de preparo.</p>
+        <p>A luz muda a cada travessia: o dourado da manhã na cozinha de hoje, o tungstênio quente dos anos 1990, o branco duro e os flashes da passarela, o âmbar noturno do jantar e o fim de tarde do zoológico.</p>
+        <p>Figurino e cenário carregam a paleta da campanha, com <strong>vermelho e verde</strong> como prioridade e amarelo e laranja como apoio. Objetos em forma de elefante são bem-vindos na decoração, e o produto aparece sempre com o molho espesso do extrato.</p>
+      </div>
+      <div class="swatches" aria-label="Paleta da campanha">
+        <span style="--c:#d20023"><i></i>Vermelho 185 C</span>
+        <span style="--c:#78c800"><i></i>Verde Jotalhão 376 C</span>
+        <span style="--c:#ffcd00"><i></i>Amarelo</span>
+        <span style="--c:#ff550a"><i></i>Laranja 165 C</span>
+      </div>
+    </div>
+    <div class="frames">
+      <figure class="main"><img src="img/c6-batidinhas.webp" alt="Protagonista mexe a panela vermelha na cozinha iluminada pela janela" loading="lazy"><figcaption>O produto sempre com o molho espesso do extrato.</figcaption></figure>
+      <div class="strip three">
+        <figure class="square"><img src="img/arte-lata.webp" alt="Lata antiga de Elefante" loading="lazy"><figcaption>Lata antiga, para a cozinha dos anos 90.</figcaption></figure>
+        <figure class="square"><img src="img/arte-mochila.webp" alt="Mochila vermelha de Elefante" loading="lazy"><figcaption>Mochila de Elefante, para o zoológico.</figcaption></figure>
+        <figure class="square"><img src="img/c4-armario.webp" alt="Mão pega o pote de Elefante no armário" loading="lazy"><figcaption>Embalagens da marca no armário do jantar.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 · OS MUNDOS -->
+<section class="plain" id="mundos">
+  <div class="wide">
+    <div class="block">
+      <div class="kicker">09</div>
+      <h2>como o filme se desdobra</h2>
+      <div class="script">seis mundos, uma cozinha só</div>
+      <div class="rule"></div>
+      <p class="lead">Cinco travessias levam a protagonista de volta ao ponto de partida. Os mundos seguem os letterings do roteiro, que voltam juntos no fim.</p>
+    </div>
+    <div class="worlds">
+      <a href="#cena1"><span class="thumb" style="background-image:url('img/c1-aberto.webp')"></span><i><b>hoje</b><s>onde tá o Elefante?</s></i></a>
+      <a href="#cena2"><span class="thumb" style="background-image:url('img/c2-mae.webp')"></span><i><b>memórias</b><s>a cozinha da mãe</s></i></a>
+      <a href="#cena3"><span class="thumb" style="background-image:url('img/passarela.webp')"></span><i><b>momentos</b><s>a passarela</s></i></a>
+      <a href="#cena4"><span class="thumb" style="background-image:url('img/c4-ilha.webp')"></span><i><b>sabores</b><s>o jantar</s></i></a>
+      <a href="#cena5"><span class="thumb" style="background-image:url('img/c5-filho.webp')"></span><i><b>afeto</b><s>o zoológico</s></i></a>
+      <a href="#cena6"><span class="thumb" style="background-image:url('img/c6-todos.webp')"></span><i><b>todo mundo</b><s>o reencontro</s></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- CENA 1 -->
+<section class="plain" id="cena1">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">Cena 1 <span>INT. Cozinha · Dia · trilha alegre</span></div>
+      <h2>onde tá o elefante?</h2>
+      <div class="script">o ponto de partida</div>
+      <div class="rule"></div>
+      <p class="lead">Plano aberto. Uma mulher prepara uma receita na própria cozinha, com a luz da manhã entrando pela janela.</p>
+      <div class="body">
+        <p>Ela solta a colher, olha em volta e pergunta em voz alta: <q>Ué, onde tá o Elefante?</q> Em seguida, dá duas batidinhas na bancada com as mãos. É o primeiro par de batidas do filme e o som que vai marcar cada passagem.</p>
+        <p>Ela sai da bancada e caminha à procura. Surge o lettering <strong>Elefante apresenta: Feito pra juntar.</strong> Um portal se abre e revela uma cozinha antiga. Depois de uma certa estranheza, ela decide entrar.</p>
+      </div>
+      <p class="note">Quando o portal se abre, a trilha da próxima cena começa a vazar.</p>
+    </div>
+    <div class="frames">
+      <figure class="main"><img src="img/c1-aberto.webp" alt="Mulher cozinha em plano aberto" loading="lazy"><figcaption>Plano aberto: a receita no fogo.</figcaption></figure>
+      <div class="strip">
+        <figure><img src="img/c1-colher.webp" alt="Mão solta a colher de pau na bancada" loading="lazy"><figcaption>Ela solta a colher.</figcaption></figure>
+        <figure><img src="img/c1-close.webp" alt="Close da protagonista, em dúvida" loading="lazy"><figcaption>“Ué, onde tá o Elefante?”</figcaption></figure>
+        <figure><img src="img/portal-cozinha-anos90.webp" alt="Portal revela a cozinha dos anos 90" loading="lazy"><figcaption>O primeiro portal.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENA 2 -->
+<section class="plain" id="cena2">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">Cena 2 <span>INT. Cozinha · anos 90 · trilha abafada, som de vinil</span></div>
+      <h2>memórias</h2>
+      <div class="script">a mulher vira menina</div>
+      <div class="rule"></div>
+      <p class="lead">Ao atravessar o portal, ela volta a ser criança. A mãe está no fogão e abre uma latinha antiga de Elefante.</p>
+      <div class="body">
+        <p>A menina se aproxima emocionada e abraça a cintura da mãe. Surge o lettering <strong>Memórias</strong>. É a passagem em que a transição suave rende mais: a mulher vira menina durante a aproximação, e o abraço chega como reencontro.</p>
+        <p>A mãe pega uma colherada do extrato e dá duas batidinhas com a colher na panela. Um novo portal se abre e a menina caminha até ele. Ao atravessar, volta a ser adulta, e ouvimos aplausos e o disparo dos flashes.</p>
+      </div>
+    </div>
+    <div class="frames">
+      <figure class="main"><img src="img/c2-mae.webp" alt="Mãe cozinha com a lata antiga ao lado da filha pequena" loading="lazy"><figcaption>A mãe abre a latinha antiga de Elefante.</figcaption></figure>
+      <div class="strip">
+        <figure><img src="img/c2-memorias.webp" alt="Menina abraça a mãe com o lettering memórias" loading="lazy"><figcaption>O abraço. Lettering: memórias.</figcaption></figure>
+        <figure><img src="img/c2-lata.webp" alt="Colherada do extrato saindo da lata" loading="lazy"><figcaption>Duas batidinhas com a colher.</figcaption></figure>
+        <figure><img src="img/portal-anos90-passarela.webp" alt="Portal revela a passarela" loading="lazy"><figcaption>O portal para a passarela.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENA 3 -->
+<section class="plain" id="cena3">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">Cena 3 <span>INT. Passarela de moda · Noite · trilha moderna, aplausos e flashes</span></div>
+      <h2>momentos</h2>
+      <div class="script">um vestido de elefante</div>
+      <div class="rule"></div>
+      <p class="lead">Ela surge desfilando com um vestido inspirado em Elefante e olha surpresa para a própria roupa.</p>
+      <div class="body">
+        <p>Ao fundo, vozes cochicham: <q>Uau, um vestido de Elefante.</q> Um estilista aparece ao lado dela e aponta para o vestido para receber os aplausos. Os dois caminham juntos e o lettering <strong>Momentos</strong> surge atrás deles.</p>
+        <p>No fim da passarela, eles param e posam para as câmeras. Dois flashes seguidos. Depois do segundo, um novo portal se abre para uma cozinha cheia, com conversas e risadas.</p>
+      </div>
+    </div>
+    <div class="frames">
+      <figure class="main"><img src="img/passarela.webp" alt="Protagonista desfila com vestido vermelho" loading="lazy"><figcaption>O desfile com o vestido inspirado em Elefante.</figcaption></figure>
+      <div class="strip">
+        <figure><img src="img/momentos.webp" alt="Protagonista e estilista com o lettering momentos" loading="lazy"><figcaption>O estilista. Lettering: momentos.</figcaption></figure>
+        <figure><img src="img/portal-passarela-cozinha.webp" alt="Portal revela a cozinha à noite" loading="lazy"><figcaption>Depois do segundo flash, o portal.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENA 4 -->
+<section class="plain" id="cena4">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">Cena 4 <span>INT. Cozinha · Noite · trilha animada, som ambiente</span></div>
+      <h2>sabores</h2>
+      <div class="script">amor, pega o elefante?</div>
+      <div class="rule"></div>
+      <p class="lead">Uma cozinha com ilha central, várias pessoas reunidas em volta e um homem cozinhando.</p>
+      <div class="body">
+        <p>Ele olha para ela e diz, sorrindo: <q>Amor, pega o Elefante ali pra mim?</q> Ela vai até um armário superior de correr. Ao abri-lo, surge o lettering <strong>Sabores</strong>.</p>
+        <p>A mão dela atravessa o lettering na letra O e puxa de dentro dele uma embalagem comemorativa de Elefante, entre as outras embalagens da marca. Ela entrega o pote e ele manda dois beijinhos no ar. Um novo portal se abre, com som de natureza e risadas de criança.</p>
+      </div>
+    </div>
+    <div class="frames">
+      <figure class="main"><img src="img/c4-ilha.webp" alt="Amigos reunidos em volta da ilha da cozinha à noite" loading="lazy"><figcaption>A cozinha cheia, à noite.</figcaption></figure>
+      <div class="strip">
+        <figure><img src="img/c4-sabores.webp" alt="Mão atravessa o lettering sabores" loading="lazy"><figcaption>A mão atravessa o O de sabores.</figcaption></figure>
+        <figure><img src="img/c4-entrega.webp" alt="Ela entrega o pote ao marido" loading="lazy"><figcaption>A entrega e os dois beijinhos.</figcaption></figure>
+        <figure><img src="img/portal-cozinha-zoo.webp" alt="Portal revela o zoológico" loading="lazy"><figcaption>O portal para o zoológico.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENA 5 -->
+<section class="plain" id="cena5">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">Cena 5 <span>EXT. Zoológico · Dia · sons da natureza e pessoas falando</span></div>
+      <h2>afeto</h2>
+      <div class="script">mãe, olha o elefante!</div>
+      <div class="rule"></div>
+      <p class="lead">A câmera acompanha a caminhada dela até um menino que come um cachorro-quente olhando um elefante.</p>
+      <div class="body">
+        <p>Entra o lettering <strong>Afeto</strong>. O menino aponta, <q>Mãe, olha o Elefante!</q>, e derruba um pouco do molho, bem consistente, na blusa. Ela olha para ele encantada, limpa a blusa duas vezes rapidamente com o dedo e responde sorrindo: <q>Você viu, filho?</q></p>
+        <p>Ela olha para o lado e percebe que mais um portal se abre. Ao entrar, volta para a mesma cozinha da primeira cena.</p>
+      </div>
+    </div>
+    <div class="frames">
+      <figure class="main"><img src="img/c5-afeto.webp" alt="Mulher caminha no zoológico com o lettering afeto" loading="lazy"><figcaption>A caminhada. Lettering: afeto.</figcaption></figure>
+      <div class="strip">
+        <figure><img src="img/c5-hotdog.webp" alt="Menino segura cachorro-quente com molho" loading="lazy"><figcaption>O molho cai na blusa.</figcaption></figure>
+        <figure><img src="img/c5-filho.webp" alt="Menino aponta o elefante para a mãe" loading="lazy"><figcaption>“Mãe, olha o Elefante!”</figcaption></figure>
+        <figure><img src="img/portal-zoo-cozinha.webp" alt="Portal de volta para a cozinha" loading="lazy"><figcaption>O portal de volta.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENA 6 -->
+<section class="plain" id="cena6">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">Cena 6 <span>INT. Cozinha · Dia · trilha inicial, mais animada</span></div>
+      <h2>todo mundo</h2>
+      <div class="script">tava aqui esse tempo todo</div>
+      <div class="rule"></div>
+      <p class="lead">Close na bancada. A tromba do Jotalhão entra em quadro e deixa ali o pote de Elefante.</p>
+      <div class="body">
+        <p>Ela olha para o pote, surpresa e feliz: <q>Ah, o Elefante tava aqui esse tempo todo!</q> Nesse momento, as pessoas que apareceram nos outros mundos chegam sorrindo, interagem com ela e se juntam em volta da bancada.</p>
+        <p>Ela pega uma colherada do pote, em close, e dá duas batidinhas na panela. <strong>A câmera sobe para o top view da panela, e daí seguimos para a cena final.</strong></p>
+      </div>
+    </div>
+    <div class="frames">
+      <figure class="main"><img src="img/c6-todos.webp" alt="Amigos chegam à cozinha e se juntam em volta da bancada" loading="lazy"><figcaption>Todos em volta da bancada.</figcaption></figure>
+      <div class="strip">
+        <figure><img src="img/c6-tromba.webp" alt="Tromba do Jotalhão deixa o pote na bancada" loading="lazy"><figcaption>A tromba do Jotalhão.</figcaption></figure>
+        <figure><img src="img/c6-pote.webp" alt="Protagonista encontra o pote" loading="lazy"><figcaption>“Tava aqui esse tempo todo!”</figcaption></figure>
+        <figure><img src="img/c6-batidinhas.webp" alt="Ela mexe a panela com a colher" loading="lazy"><figcaption>Duas batidinhas na panela.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENA FINAL -->
+<section class="plain" id="final">
+  <div class="board">
+    <div class="block">
+      <div class="kicker">Cena final <span>Top view · KV · cartela</span></div>
+      <h2>um círculo, todos os mundos</h2>
+      <div class="script">da panela ao mosaico</div>
+      <div class="rule"></div>
+      <p class="lead">O encerramento reúne em uma só imagem os sabores e os encontros que acompanhamos ao longo do filme.</p>
+      <div class="body">
+        <p>Partimos do top view da panela e conectamos seu formato circular ao da embalagem aberta de Elefante. A receita vira extrato numa passagem contínua, e o olhar de cima deixa em primeiro plano a textura e a consistência do produto.</p>
+        <p>Sobre essa imagem, os letreiros entram em movimento: <strong>Elefante. Feito pra juntar.</strong> Em seguida vêm <strong>memórias, momentos, sabores, afeto</strong> e <strong>todo mundo</strong>. Cada palavra retoma uma experiência vivida pela protagonista e prepara a transformação da embalagem no mosaico final.</p>
+        <p>O círculo segue como elo visual, e a imagem do produto dá lugar à composição do KV. Como na referência, as cenas se revelam aos poucos dentro dos recortes: cada mundo ocupa o seu espaço no ritmo da trilha, até o círculo se completar com as pessoas que encontramos pelo caminho. É o mesmo recorte dos portais, agora com todos os mundos abertos ao mesmo tempo.</p>
+        <p><strong>Lettering:</strong> Junte-se aos Mundos de Elefante. Elefante 85 anos. Feito pra juntar.<br><strong>Loc. off:</strong> Elefante. Feito pra juntar.</p>
+      </div>
+    </div>
+    <div class="frames">
+      <figure class="embed">
+      <div class="player"><iframe loading="lazy" src="https://drive.google.com/file/d/1JnKxrIoQySjATDAnoTrHQsoWKjV3P7IN/preview" allow="autoplay; fullscreen" allowfullscreen title="Referência · Mosaico da cena final"></iframe></div>
+      <figcaption><span>Referência · Mosaico da cena final</span><a href="https://drive.google.com/file/d/1JnKxrIoQySjATDAnoTrHQsoWKjV3P7IN/view" target="_blank" rel="noopener">Abrir no Drive ↗</a></figcaption>
+    </figure>
+      <div class="strip">
+        <figure><img src="img/ideia.webp" alt="Top view do pote aberto de Elefante" loading="lazy"><figcaption>Top view: da panela ao pote.</figcaption></figure>
+        <figure><img src="img/cartela.webp" alt="Pote aberto com o lettering Feito pra juntar Todo Mundo" loading="lazy"><figcaption>Os letreiros em movimento.</figcaption></figure>
+        <figure><img src="img/mosaico.webp" alt="Mosaico circular com cenas da campanha sobre fundo verde" loading="lazy"><figcaption>O mosaico do KV.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIM -->
+<section class="glow shade-r" id="fim">
+  <div class="bg" style="background-image:url('img/capa.webp');background-position:25% center"></div>
+  <div class="block right">
+    <div class="kicker">10</div>
+    <h2>feito pra juntar</h2>
+    <div class="script">a mesma cozinha, agora cheia</div>
+    <div class="rule"></div>
+    <p class="lead">Ao reunir essas possibilidades, damos expressão cinematográfica ao conceito Feito pra juntar.</p>
+    <div class="body">
+      <p>Elefante conecta a lembrança da infância à vida adulta e aproxima gerações em torno de sabores e gestos familiares.</p>
+      <p><strong>Cada travessia prepara o encontro final, quando as pessoas que conhecemos ao longo da jornada se reúnem na mesma cozinha.</strong></p>
+    </div>
+    <div class="endmark">fim</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.documentElement.classList.add('js');
+const deck=document.getElementById('deck');
+const secs=[...deck.querySelectorAll('section')];
+const cur=document.getElementById('cur');
+document.getElementById('tot').textContent=secs.length;
+const dots=document.getElementById('dots');
+secs.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.type='button';
+  b.setAttribute('aria-label','Ir para a seção '+(i+1));
+  b.addEventListener('click',()=>s.scrollIntoView({behavior:'smooth'}));
+  dots.appendChild(b);
+});
+const dotEls=[...dots.children];
+let idx=0;
+function mark(i){
+  idx=i;
+  secs[i].classList.add('on');
+  cur.textContent=i+1;
+  dotEls.forEach((d,j)=>d.classList.toggle('cur',j===i));
+}
+mark(0);
+let ticking=false;
+function sync(){
+  ticking=false;
+  const mid=deck.scrollTop+deck.clientHeight*.5;
+  let i=0;
+  while(i<secs.length-1 && secs[i+1].offsetTop<=mid) i++;
+  if(i!==idx||!secs[i].classList.contains('on')) mark(i);
+}
+deck.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(sync)}},{passive:true});
+addEventListener('resize',sync);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();secs[Math.min(idx+1,secs.length-1)].scrollIntoView({behavior:'smooth'})}
+  if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();secs[Math.max(idx-1,0)].scrollIntoView({behavior:'smooth'})}
+});
+</script>
+</body>
+</html>
