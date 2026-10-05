@@ -189,6 +189,10 @@ section.on .recorte img{transform:scale(1)}
 .sync-label{position:absolute;left:10px;z-index:2;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream);background:rgba(20,11,8,.72);padding:5px 9px;border-radius:3px}
 .sync-label.top{top:10px}
 .sync-label.bottom{top:calc(50% + 10px)}
+.hib{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:14px;align-items:start;min-width:0}
+.ref-v .player{aspect-ratio:9/16}
+.ref-v video{object-fit:cover}
+.ref-v .note{margin-top:8px;text-transform:none;letter-spacing:.02em;font-size:12.5px;font-family:var(--script);font-style:italic;opacity:.85}
 @media (max-width:980px){
   .board{grid-template-columns:minmax(0,1fr)}
   .quadros.four{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -206,6 +210,8 @@ section.on .recorte img{transform:scale(1)}
   .insula-mark{right:14px;height:28px}
 }
 @media (max-width:520px){
+  .hib{grid-template-columns:minmax(0,1fr)}
+  .ref-v .player{width:min(100%,320px)}
   .worlds{grid-template-columns:repeat(2,minmax(0,1fr))}
   .quadros,.quadros.pair,.quadros.four{grid-template-columns:minmax(0,1fr)}
   .quadros .big{grid-row:auto;aspect-ratio:16/9}
@@ -431,6 +437,10 @@ section.on .recorte img{transform:scale(1)}
         <p>O formato híbrido também favorece a construção das transições e dos portais, que serão desenvolvidos em sintonia com os movimentos dos personagens e a emoção de cada passagem.</p>
       </div>
     </div>
+    <div class="hib">
+    <figure class="embed ref-v"><div class="player"><video class="loop" muted loop playsinline controls preload="none" poster="video/ref-hibrido.webp" aria-label="Referência de híbrido: esboço, cena gerada e a atuação filmada em casa"><source src="video/ref-hibrido.mp4" type="video/mp4"><source src="video/ref-hibrido.webm" type="video/webm"></video></div>
+      <figcaption><span>Referência · híbrido</span></figcaption>
+      <p class="note">Do esboço à cena: a mesma atuação, filmada num ambiente simples, ganha mundos diferentes construídos em IA.</p></figure>
     <div class="plan">
       <figure class="portal-fig plan-fig"><img src="img/q-passarela.webp" alt="A protagonista desfila na passarela com o vestido vermelho inspirado em Elefante e olha surpresa para a própria roupa" loading="lazy"><figcaption>Momentos: a passarela, com o vestido inspirado em Elefante, toda em IA.</figcaption></figure>
       <div class="plan-item">
@@ -449,6 +459,7 @@ section.on .recorte img{transform:scale(1)}
         <p>Guiados pelos movimentos dos personagens filmados.</p>
       </div>
       <p class="note">Todo o processo parte de uma mesma visão de direção, para que as cenas filmadas e as imagens geradas componham uma experiência contínua, acolhedora e visualmente coesa.</p>
+    </div>
     </div>
   </div>
 </section>
